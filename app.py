@@ -9,10 +9,11 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import StuffDocumentsChain, LLMChain
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
-from langchain.chains.combine_documents import create_stuff_documents_chain
 
 load_dotenv()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+api = st.secrets['GEMINI_API_KEY']
+# os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=api)
 
 def get_pdf_text(pdf_docs):
     text = ""
