@@ -99,13 +99,11 @@ To get started with AskMyPDFs, follow these steps:
 *   **Summarization Features:** Add functionality to summarize PDF documents or specific sections.
 *   **More Control Over Chunking:** Allow users to customize chunk size and overlap for text splitting.
 
-## License
-
-[Specify your project license here, e.g., MIT License, Apache 2.0, or choose to use no license. If you are unsure, consider using the MIT License.]
 
 ## Contact
 
 Mitesh Nandan
+
 [LinkedIn Profile](https://www.linkedin.com/in/mitesh-nandan/)
 
 
