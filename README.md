@@ -71,7 +71,7 @@ To get started with AskMyPDFs, follow these steps:
 
 1.  **Run the Streamlit application:**
     ```bash
-    streamlit run your_script_name.py  # Replace 'your_script_name.py' with the name of your Python script (likely the name of the provided code, e.g., app.py)
+    streamlit run app.py
     ```
 
 2.  **Access the application:** Open your web browser and go to the URL displayed in the terminal (usually `http://localhost:8501`).
