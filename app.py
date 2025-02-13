@@ -25,9 +25,9 @@ def stream_data(text):
 
 class PdfChatbot():
     def __init__(self):
-        # self.api_key = os.getenv('GEMINI_API_KEY')
+        self.api_key = os.getenv('GEMINI_API_KEY')
         self.api_key = st.secrets['GEMINI_API_KEY']
-        self.client = genai.Client(api_key=self.api_key)
+        # self.client = genai.Client(api_key=self.api_key)
         # self.vector_database = None
         self.documents = None
         self.embeddings = None
@@ -119,13 +119,16 @@ class PdfChatbot():
                     contents= [prompt],
                 )
                 st.session_state["messages"].append({"role": "bot", "content": response.text})
-                for message in st.session_state["messages"]:
+                for i, message in enumerate(st.session_state["messages"]):
                     with st.chat_message(message["role"]):
-                        if message['role'] == 'user':
+                        if message["role"] == "user":
                             st.markdown(message["content"])
                         else:
-                            stream = stream_data(message["content"])
-                            st.write_stream(stream)
+                            if i == len(st.session_state["messages"]) - 1:  # Only stream the last message
+                                stream = stream_data(message["content"])
+                                st.write_stream(stream)
+                            else:
+                                st.markdown(message["content"])
                 # with st.chat_message("bot"):
                 #     st.markdown(response.text)
             else:
