@@ -161,25 +161,32 @@ def main():
 
     with st.sidebar:
         st.title("Upload here:")
-        pdf_docs = st.file_uploader("Upload Your PDFs Here:", accept_multiple_files=True)
-        if st.button("Submit and process"):
-            with st.spinner("Processing..."):
-                try:
-                    raw_text = chatbot.read_pdf(pdf_docs)
-                    logging.info("processed PDFs to text successfully")
+        
+        pdf_docs = st.file_uploader("Choose files", accept_multiple_files=True)
+        MAX_FILES = 4
+        if pdf_docs:
+            if len(pdf_docs) > MAX_FILES:
+                st.warning(f"You can only upload a maximum of {MAX_FILES} files. Please remove some files.")
+            else:
+                # pdf_docs = st.file_uploader("Upload Your PDFs Here:", accept_multiple_files=True)
+                if st.button("Submit and process"):
+                    with st.spinner("Processing..."):
+                        try:
+                            raw_text = chatbot.read_pdf(pdf_docs)
+                            logging.info("processed PDFs to text successfully")
 
-                    text_chunks = chatbot.split_text(raw_text)
-                    logging.info("Created text chunks successfully")
+                            text_chunks = chatbot.split_text(raw_text)
+                            logging.info("Created text chunks successfully")
 
-                    chatbot.generate_embeddings(text_chunks)
-                    logging.info("created embeddings")
+                            chatbot.generate_embeddings(text_chunks)
+                            logging.info("created embeddings")
 
-                    chatbot.generate_vector_db(chatbot.embeddings)
-                    logging.info("created vector db successfully")
+                            chatbot.generate_vector_db(chatbot.embeddings)
+                            logging.info("created vector db successfully")
 
-                    st.success("Processing complete!")
-                except Exception as e:
-                    st.error(f"Error processing PDFs: {str(e)}")
+                            st.success("Processing complete!")
+                        except Exception as e:
+                            st.error(f"Error processing PDFs: {str(e)}")
 
         st.markdown("---")
         st.markdown("## 🧑🏾‍🦱 Mitesh Nandan")
