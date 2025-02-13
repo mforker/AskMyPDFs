@@ -9,6 +9,7 @@ import faiss
 import os
 import logging
 import time
+import socket
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
@@ -18,6 +19,16 @@ logging.basicConfig(filename = "app.log", level=logging.DEBUG, format="%(asctime
 
 load_dotenv()
 
+def is_localhost():
+    try:
+        host_name = socket.gethostname()
+        host_ip = socket.gethostbyname(host_name)
+        local_ips = ['127.0.0.1', 'localhost']
+
+        return host_ip.startswith("192.168.") or host_ip.startswith("10.") or host_ip in local_ips
+    except Exception as e:
+        return False
+
 def stream_data(text):
     for word in text.split(" "):
         yield word + " "
@@ -25,8 +36,8 @@ def stream_data(text):
 
 class PdfChatbot():
     def __init__(self):
-        # self.api_key = os.getenv('GEMINI_API_KEY')
-        self.api_key = st.secrets['GEMINI_API_KEY']
+        self.api_key = os.getenv('GEMINI_API_KEY') if is_localhost() else st.secrets['GEMINI_API_KEY']
+        # self.api_key = st.secrets['GEMINI_API_KEY']
         self.client = genai.Client(api_key=self.api_key)
         # self.vector_database = None
         self.documents = None
@@ -174,7 +185,9 @@ def main():
         st.markdown("## 🧑🏾‍🦱 Mitesh Nandan")
         st.markdown("Connect with me on LinkedIn:")
         linkedin_url = "https://www.linkedin.com/in/mitesh-nandan/"  # Replace with your actual LinkedIn URL
+        git_profile =  "https://github.com/mforker"
         st.markdown(f"[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)]({linkedin_url})")
+        st.markdown(f"[![GitHub Profile](https://img.shields.io/badge/GitHub-mforker-blue?logo=github)]({git_profile})")
 
 chatbot = PdfChatbot()
 if __name__ == '__main__':
