@@ -25,9 +25,9 @@ def stream_data(text):
 
 class PdfChatbot():
     def __init__(self):
-        self.api_key = os.getenv('GEMINI_API_KEY')
+        # self.api_key = os.getenv('GEMINI_API_KEY')
         self.api_key = st.secrets['GEMINI_API_KEY']
-        # self.client = genai.Client(api_key=self.api_key)
+        self.client = genai.Client(api_key=self.api_key)
         # self.vector_database = None
         self.documents = None
         self.embeddings = None
