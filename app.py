@@ -184,7 +184,7 @@ def main():
         st.markdown("---")
         st.markdown("## 🧑🏾‍🦱 Mitesh Nandan")
         st.markdown("Connect with me on LinkedIn:")
-        linkedin_url = "https://www.linkedin.com/in/mitesh-nandan/"  # Replace with your actual LinkedIn URL
+        linkedin_url = "https://www.linkedin.com/in/mitesh-nandan/"
         git_profile =  "https://github.com/mforker"
         st.markdown(f"[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)]({linkedin_url})")
         st.markdown(f"[![GitHub Profile](https://img.shields.io/badge/GitHub-mforker-blue?logo=github)]({git_profile})")
