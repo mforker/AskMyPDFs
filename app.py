@@ -184,7 +184,7 @@ def main():
                             chatbot.generate_vector_db(chatbot.embeddings)
                             logging.info("created vector db successfully")
 
-                            st.success("Processing complete!")
+                            st.success("Processing complete! Ask questions now...")
                         except Exception as e:
                             st.error(f"Error processing PDFs: {str(e)}")
 
