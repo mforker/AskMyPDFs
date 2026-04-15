@@ -65,7 +65,7 @@ class PdfChatbot():
         embeddings = []
         for text in texts:
             request = self.client.models.embed_content(
-                model = "text-embedding-004",
+                model = "gemini-embedding-001",
                 contents= text
             )
             if request.embeddings is not None:
@@ -99,7 +99,7 @@ class PdfChatbot():
     def user_input(self, question:str):
         st.session_state["messages"].append({"role": "user", "content": question})
         request = self.client.models.embed_content(
-            model="text-embedding-004",
+            model="gemini-embedding-001",
             contents= question
         )
         index = faiss.read_index('db.index')
@@ -126,7 +126,7 @@ class PdfChatbot():
     question: {question}
     '''
                 response = self.client.models.generate_content(
-                    model= 'gemini-2.0-flash',
+                    model= 'gemini-3-flash-preview',
                     contents= [prompt],
                 )
                 st.session_state["messages"].append({"role": "bot", "content": response.text})
